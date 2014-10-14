@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 sudo apt-get -y update
-sudo apt-get -y install gnome-platform haskell-platform
+sudo apt-get -y install gnome-platform-devel haskell-platform
 sudo apt-get -y install libncurses5-dev libgsl0-dev liblapack-dev
 cabal update
 cabal install 'gtk2hs-buildtools==0.12.*' 
