@@ -18,16 +18,13 @@ sudo apt-get -y install libncurses5-dev libgsl0-dev liblapack-dev
 # Load latest Haskell package list
 cabal update
 
-# Install tools for building GTK applications in Haskell
-cabal install 'gtk2hs-buildtools==0.12.*' 
-
-# Make these available
+# Make executables built with cabal available
 export PATH=${PATH}:${HOME}/.cabal/bin
 
-# Pull in Haskell package dependencies
-cabal install 'gtksourceview3==0.12.*'
-cabal install text hledger MissingH hmatrix-gsl data-accessor
-cabal install mtl Chart-cairo
+# Install tools for building GTK applications in Haskell
+cabal install 'gtk2hs-buildtools==0.12.*' 'gtksourceview3==0.12.*' \
+              text hledger MissingH hmatrix-gsl data-accessor \
+              mtl Chart-cairo
 
 # Now run "make" to build cpi-ide
 
