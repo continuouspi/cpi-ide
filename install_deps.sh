@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Time-stamp: <Wednesday 15 October 2014 / install_deps.sh>
+# Time-stamp: <Thursday 16 October 2014 / install_deps.sh>
 #
 # Script to install dependencies for cpi-ide.
 # After executing this, run "make".
@@ -24,22 +24,24 @@ export PATH=${PATH}:${HOME}/.cabal/bin
 # Install tools for building GTK applications in Haskell
 cabal install 'gtk2hs-buildtools==0.12.*' 'gtksourceview3==0.12.*' \
               text hledger MissingH hmatrix-gsl data-accessor \
-              mtl Chart-cairo
+              'Chart==1.2' 'Chart-cairo==1.2.*'
 
 # Now run "make" to build cpi-ide
 
 # 2014-10-15 Notes:
 #
 #  Restricting gtk2hs-builtools and gtksourceview3 to 0.12.* is because of a
-#  change in the gtk2hs 0.13 release --- the labels on events went from
-#  standard strings to some gnome-specific string structure.
+#  change in the gtk2hs 0.13 release --- the type of eventKeyName in gtk3 went
+#  from String to DefaultGlibString
 #
-#  Package "mtl" is in there to prompt an update apparently necessary for
-#  Chart-cairo to install --- there is some complex dependency network around
-#  transformers going from 0.3 to 0.4 which it seems the solver can't handle.
+#  Restricting Chart-cairo to 1.2.* is because of a change in the 1.3 release,
+#  where renderabletoFile acquired an additional argument. 
 #
-# A better solution to both of these would be to configure a proper cabal
-# build for cpi-ide; better still, pull core cpi libraries into package and
+#  Restricting Chart to 1.2 is because it seems the dependency solver cannot
+#  find a solution without this hint.
+#
+# A better solution to all of these would be to configure a proper cabal
+# build for cpi-ide; better still, put core cpi libraries into a package and
 # use cabal build for cpiwb and cpi-ide. 
 #
 # End of file
